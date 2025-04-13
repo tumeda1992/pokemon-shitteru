@@ -1,12 +1,11 @@
 import { NextRequest } from "next/server";
 import { describe, it, expect, vi } from "vitest";
 
+import { GetRoomParticipantsQuery } from "@/backend/domain/room/queries/GetRoomParticipantsQuery";
 import { RoomRepository } from "@/backend/domain/room/repositories/RoomRepository";
 import testWithDb from "@/backend/test/helpers/testWithDb";
 
 import { GET } from "./route";
-
-import { GetRoomParticipantsQuery } from "@/backend/domain/room/queries/GetRoomParticipantsQuery";
 
 // モックの作成
 vi.mock("@/backend/domain/room/queries/GetRoomParticipantsQuery");

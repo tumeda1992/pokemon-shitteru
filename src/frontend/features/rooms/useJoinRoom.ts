@@ -1,10 +1,19 @@
 import { useState } from "react";
 
-export const useJoinRoom = () => {
+export type UseJoinRoom = {
+  error: string;
+  isLoading: boolean;
+  joinRoom: (roomCode: string, participantId: number) => Promise<void>;
+};
+
+export const useJoinRoom = (): UseJoinRoom => {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const joinRoom = async (roomCode: string, participantId: number) => {
+  const joinRoom = async (
+    roomCode: string,
+    participantId: number
+  ): Promise<void> => {
     setIsLoading(true);
     setError("");
 
@@ -21,7 +30,7 @@ export const useJoinRoom = () => {
         setError(data.error);
         return;
       }
-    } catch (e) {
+    } catch (_e) {
       setError("予期せぬエラーが発生しました");
     } finally {
       setIsLoading(false);

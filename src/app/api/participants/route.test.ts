@@ -1,19 +1,15 @@
 import { NextRequest } from "next/server";
 import { describe, it, expect, vi } from "vitest";
 
-import { CreateParticipantCommand } from "../../../backend/domain/participant/commands/CreateParticipantCommand";
-import { ParticipantRepository } from "../../../backend/domain/participant/repositories/ParticipantRepository";
-
-import { POST } from "./route";
+import { CreateParticipantCommand } from "@/backend/domain/participant/commands/CreateParticipantCommand";
+import { ParticipantRepository } from "@/backend/domain/participant/repositories/ParticipantRepository";
 import testWithDb from "@/backend/test/helpers/testWithDb";
 
+import { POST } from "./route";
+
 // モックの作成
-vi.mock(
-  "../../../backend/domain/participant/commands/CreateParticipantCommand"
-);
-vi.mock(
-  "../../../backend/domain/participant/repositories/ParticipantRepository"
-);
+vi.mock("@/backend/domain/participant/commands/CreateParticipantCommand");
+vi.mock("@/backend/domain/participant/repositories/ParticipantRepository");
 
 describe("POST /api/participants", () => {
   testWithDb(async (_) => {

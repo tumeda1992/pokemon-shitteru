@@ -1,5 +1,5 @@
-import { RoomRepository } from "@/backend/domain/room/repositories/RoomRepository";
-import { ParticipantRepository } from "@/backend/domain/participant/repositories/ParticipantRepository";
+import type { ParticipantRepository } from "@/backend/domain/participant/repositories/ParticipantRepository";
+import type { RoomRepository } from "@/backend/domain/room/repositories/RoomRepository";
 
 type JoinRoomCommandInput = {
   roomCode: string;

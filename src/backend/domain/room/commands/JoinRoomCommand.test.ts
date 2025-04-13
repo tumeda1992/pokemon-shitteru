@@ -1,12 +1,13 @@
 import { describe, it, expect } from "vitest";
 
-import testWithDb from "@/backend/test/helpers/testWithDb";
-import { RoomRepository } from "@/backend/domain/room/repositories/RoomRepository";
 import { ParticipantRepository } from "@/backend/domain/participant/repositories/ParticipantRepository";
+import { RoomRepository } from "@/backend/domain/room/repositories/RoomRepository";
+import testWithDb from "@/backend/test/helpers/testWithDb";
+
 import { JoinRoomCommand } from "./JoinRoomCommand";
 
 describe("JoinRoomCommand", () => {
-  testWithDb(async (prisma) => {
+  testWithDb(async (_prisma) => {
     it("should join a room with valid room code and participant id", async () => {
       const roomRepository = new RoomRepository();
       const participantRepository = new ParticipantRepository();

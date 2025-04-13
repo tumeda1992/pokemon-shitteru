@@ -14,7 +14,7 @@ export function useCreateRoom(): UseCreateRoom {
   const [roomCode, setRoomCode] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleCreateRoom = async (generationId: string) => {
+  const handleCreateRoom = async (generationId: string): Promise<void> => {
     setError("");
     setRoomCode("");
     setIsLoading(true);

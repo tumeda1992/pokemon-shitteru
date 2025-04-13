@@ -9,7 +9,7 @@ import type { NextRequest } from "next/server";
 export async function POST(
   request: NextRequest,
   { params }: { params: { roomCode: string; participantId: string } }
-) {
+): Promise<NextResponse> {
   try {
     const roomRepository = new RoomRepository();
     const participantRepository = new ParticipantRepository();

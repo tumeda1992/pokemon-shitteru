@@ -8,7 +8,7 @@ import type { NextRequest } from "next/server";
 export async function GET(
   request: NextRequest,
   { params }: { params: { roomCode: string } }
-) {
+): Promise<NextResponse> {
   try {
     const roomRepository = new RoomRepository();
     const query = new GetRoomParticipantsQuery(roomRepository);

@@ -8,7 +8,7 @@ type TableRow = {
   TABLE_NAME: string;
 };
 
-const cleanUpDb = async (prisma: PrismaClientType) => {
+const cleanUpDb = async (prisma: PrismaClientType): Promise<void> => {
   await prisma.$executeRaw`SET FOREIGN_KEY_CHECKS=0`;
   const tableRows = await prisma.$queryRaw<
     TableRow[]
@@ -25,7 +25,7 @@ export default async (
   testFunc: (prisma: PrismaClientType) => Promise<void>
 ): Promise<void> => {
   describe("test with DB", async () => {
-    beforeEach(async () => {
+    beforeEach(async (): Promise<() => Promise<void>> => {
       // テスト用のDBを初期化
       await cleanUpDb(prisma);
       return async (): Promise<void> => {
@@ -33,7 +33,7 @@ export default async (
       };
     });
 
-    afterAll(async () => {
+    afterAll(async (): Promise<void> => {
       await prisma.$disconnect();
     });
 
