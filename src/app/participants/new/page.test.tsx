@@ -1,6 +1,6 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { useRouter } from "next/navigation";
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect, vi, beforeEach } from "vitest";
 
 import testWithDb from "@/backend/test/helpers/testWithDb";
 
@@ -16,15 +16,20 @@ const mockFetch = vi.fn();
 global.fetch = mockFetch;
 
 describe("NewParticipantPage", () => {
-  testWithDb(async (_) => {
-    beforeEach(() => {
-      vi.clearAllMocks();
-    });
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
 
+  testWithDb(async (_) => {
     it("ニックネームを入力して参加者を作成できる", async () => {
       // モックの設定
       const mockRouter = {
         push: vi.fn(),
+        back: vi.fn(),
+        forward: vi.fn(),
+        refresh: vi.fn(),
+        replace: vi.fn(),
+        prefetch: vi.fn(),
       };
       vi.mocked(useRouter).mockReturnValue(mockRouter);
       mockFetch.mockResolvedValueOnce({
@@ -40,7 +45,7 @@ describe("NewParticipantPage", () => {
       fireEvent.change(input, { target: { value: "テストユーザー" } });
 
       // フォームの送信
-      const form = screen.getByRole("form");
+      const form = screen.getByTestId("participant-form");
       fireEvent.submit(form);
 
       // APIリクエストの検証
@@ -62,6 +67,11 @@ describe("NewParticipantPage", () => {
       // モックの設定
       const mockRouter = {
         push: vi.fn(),
+        back: vi.fn(),
+        forward: vi.fn(),
+        refresh: vi.fn(),
+        replace: vi.fn(),
+        prefetch: vi.fn(),
       };
       vi.mocked(useRouter).mockReturnValue(mockRouter);
 
@@ -69,7 +79,7 @@ describe("NewParticipantPage", () => {
       render(<NewParticipantPage />);
 
       // フォームの送信
-      const form = screen.getByRole("form");
+      const form = screen.getByTestId("participant-form");
       fireEvent.submit(form);
 
       // エラーメッセージの検証
@@ -83,6 +93,11 @@ describe("NewParticipantPage", () => {
       // モックの設定
       const mockRouter = {
         push: vi.fn(),
+        back: vi.fn(),
+        forward: vi.fn(),
+        refresh: vi.fn(),
+        replace: vi.fn(),
+        prefetch: vi.fn(),
       };
       vi.mocked(useRouter).mockReturnValue(mockRouter);
       mockFetch.mockResolvedValueOnce({
@@ -98,7 +113,7 @@ describe("NewParticipantPage", () => {
       fireEvent.change(input, { target: { value: "テストユーザー" } });
 
       // フォームの送信
-      const form = screen.getByRole("form");
+      const form = screen.getByTestId("participant-form");
       fireEvent.submit(form);
 
       // エラーメッセージの検証

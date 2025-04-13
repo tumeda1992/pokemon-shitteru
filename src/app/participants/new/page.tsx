@@ -1,14 +1,14 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, type ReactElement } from "react";
 
-export default function NewParticipantPage() {
+const NewParticipantPage = (): ReactElement => {
   const [nickname, setNickname] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
     setError("");
 
@@ -50,7 +50,11 @@ export default function NewParticipantPage() {
             参加者情報の入力
           </h2>
         </div>
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit} role="form">
+        <form
+          className="mt-8 space-y-6"
+          onSubmit={handleSubmit}
+          data-testid="participant-form"
+        >
           <div>
             <label htmlFor="nickname" className="sr-only">
               ニックネーム
@@ -85,4 +89,6 @@ export default function NewParticipantPage() {
       </div>
     </div>
   );
-}
+};
+
+export default NewParticipantPage;
