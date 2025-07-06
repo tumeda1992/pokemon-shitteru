@@ -8,7 +8,8 @@ import type { NextRequest } from "next/server";
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { roomCode: string; participantId: string } }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  { params }: any
 ): Promise<NextResponse> {
   try {
     const roomRepository = new RoomRepository();
